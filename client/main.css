@@ -42,19 +42,21 @@ input {
 .new-item {
     display: flex;
     flex-direction: row;
-
 }
 
 .item-button {
     height: auto;
     width: 24px;
 
-    margin-right: 8px;
     padding: 8px;
     border-radius: 4px;
 
     background: transparent;
     background-color: transparent;
+}
+
+.item-button:active {
+    transform: scale(1.2);
 }
 
 #drag {
@@ -87,8 +89,24 @@ input {
     border: none;
 
     width: 100%;
-
+    margin: 0px 16px 0px 0px;
     padding: 8px 0px;
+}
+
+#add {
+    aspect-ratio: 1;
+}
+
+#add > path {
+    fill: none;
+    stroke: black;
+    stroke-width: 2;
+}
+
+#add:hover {
+    cursor: pointer;
+
+    background-color: #ddd;
 }
 
 #item:active {
