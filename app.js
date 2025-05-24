@@ -12,7 +12,14 @@ app.use(express.json());
 
 // Define HTTP routes listenting for requests
 app.get("/api", async (req,res) => {
+  console.log(req.query);
+  
+  res.send()
+  if(res.statusCode == 200){
 
+  }else{
+    return false;
+  }
 })
 
 app.post("/api", async (req,res) => {

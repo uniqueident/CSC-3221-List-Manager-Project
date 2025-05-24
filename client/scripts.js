@@ -33,12 +33,12 @@ async function WriteList() {
 
 /* Listener Functions */
 async function httpPost(e) {
-
+  console.log(`ADD BUTTON PRESSED: ${e.value}`);
   
 }
 
 function httpDelete(e) {
-
+  console.log(`DELETE BUTTON PRESSED: ${e.value}`);
   
 }
 

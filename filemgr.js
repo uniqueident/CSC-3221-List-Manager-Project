@@ -1,29 +1,72 @@
 const fs = require("fs/promises")
 
+/**
+ * @brief Asynchrnonously attempts to read data from given file. (Assumes JSON).
+ * @param {String} filepath File location relative to current file, or absolute path.
+ * @returns On success returns contents of given file, otherwise error.
+ */
 async function ReadData(filepath ='./listdata.json') {
   try {
-    fs.readFile(filepath,'utf8',(error,data));
-    if(error){
-      throw new Error(`Unable to read file! FILE:${filepath}`);
-    }
-    // Make sure the file exists
-    // Read the file
-    // convert the buffer to a json object and return it
+    //keeps the function async
+    await fs.readFile(filepath,'utf8',(error,data)=>{
+      if(error) throw new error;
+    });
+    //needed for conversion. (SUCCESS)
+    let parsed = JSON.parse(data);
+    console.log(`Data Retrieved: ${parsed}`);
+    return parsed;
+
   } catch (error) {
-    console.log(`${error}`)
+    //needed in case of failure.
+    console.log(`FAILURE TO READ, REASON: ${error}`);
     return error;
   }
 }
 
-async function WriteData(dataOut) {
+
+/**
+ * @brief Asynchronously attempts to write data from given file.
+ * @param {String} dataOut Data to write to the file.
+ * @param {String} filepath File location relative to current file, or absolute path.
+ * @returns {boolean} On success returns true, otherwise false.
+ */
+async function WriteData(dataOut,filepath = './listdata.json') {
   try {
     // Write the file
-
+    await fs.writeFile(filepath,dataOut,(error)=>{
+      if(error) throw error;
+    });
+    console.log(`Data Written: ${dataOut}`);
+    return true;
   } catch (error) {
 
-
+    console.log(`FAILURE TO WRITE, REASON: ${error}`);
+    return false;
   }
 }
 
+/**
+ * @brief Asynchronously attempts to append given data to file. (Does not create a json object to modify, just appends to the end of the file)
+ * @param {String} data Data to append.
+ * @param {String} filepath File location relative to current file, or absolute path.
+ * @returns {boolean} On success returns true, otherwise false.
+ */
+async function AppendData(data,filepath = './listdata.json'){
+    try{
+
+      fs.appendFile(filepath,data,(error)=>{
+        if(error) throw error;
+      });
+      
+      console.log(`Data Appended: ${data}`);
+      return true;
+    }catch(error){
+
+      console.log(`FAILURE TO APPEND, REASON: ${error}`);
+      return false;
+    }
+}
+
+exports.AppendData = AppendData;
 exports.ReadData = ReadData;
 exports.WriteData = WriteData;
