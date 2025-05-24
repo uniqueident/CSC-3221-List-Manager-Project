@@ -1,0 +1,88 @@
+body {
+    margin: 0px auto;
+
+    width: auto;
+    max-width: 600px;
+    padding: 0px 32px;
+
+    display: flex;
+    flex-direction: column;
+
+    font-family: sans-serif;
+}
+
+path, rect {
+    fill: black;
+}
+
+.card {
+    padding: 16px;
+
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.item {
+    border: solid lightgray 4px;
+
+    user-select: none;
+}
+
+.item > span {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.item:has(#drag:hover) {
+    background-color: #ddd;
+}
+
+.item-button {
+    height: auto;
+    width: 24px;
+
+    margin-right: 8px;
+    padding: 8px;
+    border-radius: 4px;
+
+    background: transparent;
+    background-color: transparent;
+}
+
+#drag {
+    align-items: start;
+}
+
+#drag:hover {
+    cursor: grab;
+}
+
+#edit:hover, #delete:hover {
+    cursor: pointer;
+
+    background-color: #ddd;
+}
+
+#delete {
+    margin-right: 0px;
+}
+
+#item {
+    border: none;
+
+    width: 100%;
+
+    margin: 0px 16px 0px 0px;
+}
+
+#item:active {
+     border: none;
+}
+
+#list-container {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 12px;
+}

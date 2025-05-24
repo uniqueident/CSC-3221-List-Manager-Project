@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" style="background: transparent; background-color: transparent; color-scheme: light dark;" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="52px" height="52px" viewBox="-0.5 -0.5 52 52">
+<rect x="1" y="0" width="50" height="50" rx="2.5" ry="2.5" fill="#ffffff" stroke="#ffffff" stroke-width="2" pointer-events="all" style="fill: transparent; "/>
+<path d="M 6.5 40 L 11 44.5 L 3.5 47.5 Z M 38 8 L 43 13 L 12 44 L 7 39 Z M 38.75 7.25 L 42 4 L 47 9 L 43.75 12.25 Z" fill="#ffffff" />
+</svg>
