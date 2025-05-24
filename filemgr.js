@@ -12,7 +12,7 @@ async function ReadData(filepath ='./listdata.json') {
       if(error) throw new error;
     });
     //needed for conversion. (SUCCESS)
-    let parsed = JSON.parse(data);
+    const parsed = JSON.parse(data);
     console.log(`Data Retrieved: ${parsed}`);
     return parsed;
 
@@ -57,7 +57,7 @@ async function AppendData(data,filepath = './listdata.json'){
       fs.appendFile(filepath,data,(error)=>{
         if(error) throw error;
       });
-      
+
       console.log(`Data Appended: ${data}`);
       return true;
     }catch(error){
