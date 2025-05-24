@@ -15,6 +15,10 @@ path, rect {
     fill: black;
 }
 
+input {
+    border-radius: 2px;
+}
+
 .card {
     padding: 16px;
 
@@ -26,10 +30,6 @@ path, rect {
     border: solid lightgray 4px;
 
     user-select: none;
-}
-
-.item > span {
-    width: 100%;
 
     display: flex;
     flex-direction: row;
@@ -37,6 +37,12 @@ path, rect {
 
 .item:has(#drag:hover) {
     background-color: #ddd;
+}
+
+.new-item {
+    display: flex;
+    flex-direction: row;
+
 }
 
 .item-button {
@@ -59,7 +65,7 @@ path, rect {
     cursor: grab;
 }
 
-#edit:hover, #delete:hover {
+#delete:hover {
     cursor: pointer;
 
     background-color: #ddd;
@@ -77,12 +83,19 @@ path, rect {
     margin: 0px 16px 0px 0px;
 }
 
+#new {
+    border: none;
+
+    width: 100%;
+
+    padding: 8px 0px;
+}
+
 #item:active {
      border: none;
 }
 
 #list-container {
     display: grid;
-    grid-template-rows: repeat(5, 1fr);
     gap: 12px;
 }
