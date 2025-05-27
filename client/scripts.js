@@ -1,7 +1,3 @@
-
-//this doesnt work on the browser/client-side JS
-//const { ReadData } = require("../filemgr");
-//need to replace before it works properly.
 const http = new jemHTTP;
 
 // Block Variables
@@ -16,7 +12,7 @@ const delButton =  document.querySelector("#delete");
 // Listeners
 addButton.addEventListener("click", (e)=>{
   WriteList();
-  ShowList();
+
   httpPost(e);
 });
 delButton.addEventListener("click", (e)=>{
@@ -35,16 +31,11 @@ function ShowList() {
 
 
 async function GetList() {
-  // const data = await ReadData();
-  const data = await ReadData();
-  console.log("DATA RETRIEVED");
-  //add some intermediary stuff maybe.
-  return data;
+  
 }
 
 async function WriteList() {
-  theList.push(input.value);
-  return;
+
 }
 
 /* Listener Functions */
@@ -61,14 +52,13 @@ async function httpDelete(e) {
 
 // Loading functions
 function showLoading() {
-  result.innerHTML = "Loading...";
+ result.innerHTML = "Loading...";
 }
 
 async function main() {
   addButton.disabled = true;
   delButton.disabled = true;
   showLoading();
-  console.log("DATA");
   await GetList();
 
   addButton.disabled = false;
