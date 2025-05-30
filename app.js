@@ -14,7 +14,7 @@ app.use(express.json());
 app.get("/api", async (req,res) => {
   console.log(req.query);
   
-  res.send()
+  res.send();
   if(res.statusCode == 200){
 
   }else{
@@ -23,7 +23,7 @@ app.get("/api", async (req,res) => {
 })
 
 app.post("/api", async (req,res) => {
-
+  res.send();
 })
 
 // page not found route

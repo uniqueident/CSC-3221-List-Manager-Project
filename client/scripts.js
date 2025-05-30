@@ -29,11 +29,13 @@ function ShowList() {
   result.innerHTML = output;
 }
 
-
+//uses theList variable somehow not really sure what this function is supposed to be used for exactly
+//TODO: figure out what this does and how it does it
 async function GetList() {
   
 }
-
+//writes something to theList variable
+//TODO: figure out how you write things to theList
 async function WriteList() {
 
 }
