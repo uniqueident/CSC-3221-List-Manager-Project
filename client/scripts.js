@@ -4,7 +4,7 @@ const http = new jemHTTP;
 let theList = [];
 
 // setup selectors
-const result = document.querySelector(".result");
+const result = document.querySelector("#list-container");
 const input =  document.querySelector("#new");
 const addButton =  document.querySelector("#add");
 const delButton =  document.querySelector("#delete");
@@ -12,11 +12,12 @@ const delButton =  document.querySelector("#delete");
 // Listeners
 addButton.addEventListener("click", (e)=>{
   e.preventDefault();
-  const value = e.value.trim();
+  const value = input.value.trim();
   if(!value){
     return;
   }
   WriteList(value);
+  ShowList();
   httpPost(e);
 });
 delButton.addEventListener("click", (e)=>{
@@ -63,14 +64,14 @@ function showLoading() {
  result.innerHTML = "Loading...";
 }
 
-async function main() {
-  addButton.disabled = true;
-  delButton.disabled = true;
-  showLoading();
-  await GetList();
+// async function main() {
+//   addButton.disabled = true;
+//   delButton.disabled = true;
+//   showLoading();
+//   await GetList();
 
-  addButton.disabled = false;
-  delButton.disabled = false;
-}
+//   addButton.disabled = false;
+//   delButton.disabled = false;
+// }
 
 main();
