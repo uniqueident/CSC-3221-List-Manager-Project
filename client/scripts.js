@@ -6,10 +6,14 @@ let theList = [];
 // setup selectors
 const result = document.querySelector("#list-container");
 const input =  document.querySelector("#new");
-const addButton =  document.querySelector("#add");
-const delButton =  document.querySelector("#delete");
+const addButton = document.querySelector("#add");
+const delButton = document.querySelector("#delete");
 
 // Listeners
+/**
+ * When the add button is clicked, take the input and add it to the list variable.
+ * Then refresh the UI by using ShowList().
+ */
 addButton.addEventListener("click", (e)=>{
   e.preventDefault();
   const value = input.value.trim();
@@ -20,6 +24,7 @@ addButton.addEventListener("click", (e)=>{
   ShowList();
   httpPost(e);
 });
+
 delButton.addEventListener("click", (e)=>{
   e.preventDefault();
   
@@ -74,4 +79,4 @@ function showLoading() {
 //   delButton.disabled = false;
 // }
 
-main();
+// main();
