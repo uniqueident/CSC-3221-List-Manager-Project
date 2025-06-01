@@ -23,7 +23,7 @@ app.get("/api", async (req,res) => {
 })
 
 app.post("/api", async (req,res) => {
-  res.send();
+  res.send("Post request");
 })
 
 // page not found route
