@@ -68,29 +68,52 @@ function ShowList() {
     result.innerHTML = output;
 }
 
-//returns whatever is in theList
-//TODO: return theList to the html DOM
+/**
+ * Get's the list from the server.
+ * Then updates the list variable and UI.
+ */
 async function GetList() {
-  
+    try {
+        const resp = await http.get({ path: "/api" });
+
+        if (resp.error)
+            throw new Error(resp.error);
+
+        if (Array.isArray(resp.data)) {
+            theList = resp.data;
+
+            ShowList();
+        }
+        else {
+            console.error("Unexpected data from the server: ", resp);
+
+            result.innerHTML = "<p style='color: red;'> Error: Invalid data.</p>";
+        }
+    }
+    catch (err) {
+        console.error("Failed to fetch list from server: ", err);
+
+        result.innerHTML = "<p style='color: red;'>Failed to load list.</p>";
+    }
 }
 
-//writes new items to theList variable
-//TODO: figure out how you write things to theList
+/**
+ * Writes an item to the list variable.
+ * Then appends the new value to the server data.
+ * 
+ * @param {*} value 
+ */
 async function WriteList(value) {
-  theList.push(value);
-}
+    theList.push(value);
 
-/* Listener Functions */
-async function httpPost(e) {
-    console.log(`ADD BUTTON PRESSED: ${e.value}__ ${input.value}`);
+    try {
+        await http.post("/api", { item: theList });
+    }
+    catch (err) {
+        console.error("Failed to send item to server: ", err);
 
-    return;
-}
-
-async function httpDelete(e) {
-    console.log(`DELETE BUTTON PRESSED: ${e.value}__ ${input.value}`);
-
-    return;
+        result.innerHTML = "<p style='color: red;'>Failed to save item.</p>";
+    }
 }
 
 // Loading functions
@@ -98,14 +121,13 @@ function showLoading() {
     result.innerHTML = "Loading...";
 }
 
-// async function main() {
-//   addButton.disabled = true;
-//   delButton.disabled = true;
-//   showLoading();
-//   await GetList();
+async function main() {
+    addButton.disabled = true;
 
-//   addButton.disabled = false;
-//   delButton.disabled = false;
-// }
+    showLoading();
+    await GetList();
 
-// main();
+    addButton.disabled = false;
+}
+
+main();

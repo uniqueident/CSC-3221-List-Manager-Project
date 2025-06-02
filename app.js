@@ -6,34 +6,61 @@ const fm = require("./filemgr");
 // Create the express http server
 const app = express();
 
-// Define some built-in middleware
-app.use(express.static("./Client"));
+// // Define some built-in middleware
+app.use(express.static("./client"));
 app.use(express.json());
 
 // Define HTTP routes listenting for requests
 app.get("/api", async (req,res) => {
-  console.log(req.query);
-  
-  res.send();
-  if(res.statusCode == 200){
+    console.log(req.query);
 
-  }else{
-    return false;
-  }
-})
+    try {
+        const data = await fm.ReadData();
+
+        res.status(200).json({ message: "Success", data: data });
+    }
+    catch (err) {
+        console.error("Error reading data: ", err);
+
+        res.status(500).json({ error: "Failed to read data" });
+    }
+});
 
 app.post("/api", async (req,res) => {
-  res.send("Post request");
-})
+    console.log("POST data: ", req.body);
+
+    const { item } = req.body;
+
+    if (!item || typeof item !== "string")
+        return res.status(400).json({ error: "Invalid itme" });
+
+    try {
+        const data = await fm.ReadData();
+        data.push(item);
+
+        const dataOut = JSON.stringify(data, null, 2);
+        const success = await fm.WriteData(dataOut);
+
+        if (success)
+            res.status(200).json({ message: "Item added", item });
+        else
+            res.status(500).json({ error: "Failed to write data" });
+    }
+    catch (err) {
+        console.error("Error writing data: ", err);
+
+        res.status(500).json({ error: "Server error" });
+    }
+});
 
 // page not found route
-app.all("*", (req,res) => {
-  res.status(404).send("<h1>Page Not Found...</h1>");
+app.use((req,res) => {
+    res.status(404).send("<h1>Page Not Found...</h1>");
 });
 
 // Create a server
 const appName = "Simple List";
 const port = 5000;
 app.listen(port, () => {
-  console.log(`App ${appName} is running on port ${port}`);
+    console.log(`App ${appName} is running on port ${port}`);
 })

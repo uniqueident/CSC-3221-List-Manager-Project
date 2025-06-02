@@ -1,0 +1,22 @@
+{
+  "name": "csc-3221-list-manager-project",
+  "version": "1.0.0",
+  "description": "- Create a project folder and make it the active folder.\r - Download the SimpleList - Starter repo from GitHub into your project folder.\r - Initialize the project folder as a Node project.\r - Initialize the project folder as a GitRepo\r - Create a file named `.gitignore` and add `node_modules/` to it.\r - Install the `Express` module.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uniqueident/CSC-3221-List-Manager-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uniqueident/CSC-3221-List-Manager-Project/issues"
+  },
+  "homepage": "https://github.com/uniqueident/CSC-3221-List-Manager-Project#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
