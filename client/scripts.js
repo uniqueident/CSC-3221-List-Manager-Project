@@ -27,17 +27,27 @@ addButton.addEventListener("click", (e)=>{
 
 delButton.addEventListener("click", (e)=>{
   e.preventDefault();
+  // theList.at(e.target.parentNode.id);
   
   httpDelete(e);
 });
 
 /* Helper Functions */
 function ShowList() {
-  let output = "<ul>";
+  let output = "";
+  let num = 0;
   for (const itm of theList) {
-    output += `<li>${itm}</li>`;
+    output += `<div id="${num++}" class="item card">
+            <input id="item" value="${itm}" />
+
+            <svg id="delete" class="item-button" tabindex="0" viewBox="-0.5 -0.5 52 52">
+                <path d="M 13 13 C 11.9 13 11 12.1 11 11 C 11 9.9 11.9 9 13 9 L 21 9 L 21 7 L 31 7 L 31 9 L 39 9 C 40.1 9 41 9.9 41 11 C 41 12.1 40.1 13 39 13 Z" fill="#ffffff" />
+                <rect x="14" y="16" width="5" height="30" rx="3" ry="3" fill="#ffffff" />
+                <rect x="23" y="16" width="5" height="30" rx="3" ry="3" fill="#ffffff" />
+                <rect x="32" y="16" width="5" height="30" rx="3" ry="3" fill="#ffffff" />
+            </svg>
+        </div>`;
   }
-  output += "</ul>";
   result.innerHTML = output;
 }
 
