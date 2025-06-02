@@ -51,6 +51,9 @@ result.addEventListener("click", async (e)=>{
         }
     }
     else if (e.target.id === "item") {
+        /**
+         * Add's an event that waits for the input to defocus to send the data.
+         */
         e.target.addEventListener("blur", async (event) => {
             const id = parseInt(event.target.parentNode.id);
             const newValue = event.target.value.trim();
@@ -69,7 +72,7 @@ result.addEventListener("click", async (e)=>{
             catch (err) {
                 console.error("Failed to update item: ", err);
             }
-        }, { once: true });
+        }, { once: true }); // once: true ensures that there will not be duplicate events.
     }
 });
 
@@ -134,7 +137,7 @@ async function GetList() {
  * Writes an item to the list variable.
  * Then appends the new value to the server data.
  * 
- * @param {*} value 
+ * @param {*} value The new list value.
  */
 async function WriteList(value) {
     theList.push(value);
@@ -154,10 +157,17 @@ async function WriteList(value) {
 }
 
 // Loading functions
+
+/**
+ * Presents to the user that the page is loading data.
+ */
 function showLoading() {
     result.innerHTML = "Loading...";
 }
 
+/**
+ * Function to run when the page loads to load data from the server.
+ */
 async function main() {
     addButton.disabled = true;
 

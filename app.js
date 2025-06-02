@@ -11,6 +11,10 @@ app.use(express.static("./client"));
 app.use(express.json());
 
 // Define HTTP routes listenting for requests
+
+/**
+ * The server GET operation, read's the data and sends it as a result.
+ */
 app.get("/api", async (req,res) => {
     console.log(req.query);
 
@@ -26,6 +30,10 @@ app.get("/api", async (req,res) => {
     }
 });
 
+/**
+ * The server POST operation, recieves the data, verifies the data type,
+ * then adds the data to the list before saving to the file.
+ */
 app.post("/api", async (req,res) => {
     console.log("POST data: ", req.body);
 
@@ -52,6 +60,10 @@ app.post("/api", async (req,res) => {
     }
 });
 
+/**
+ * The server PUT operation, recieves the data, verifies the data type,
+ * then modifies the data in the list at the given index.
+ */
 app.put("/api/:index", async (req, res) => {
     const index = parseInt(req.params.index);
     const { item } = req.body;
@@ -80,6 +92,10 @@ app.put("/api/:index", async (req, res) => {
     }
 });
 
+/**
+ * The server DELETE operation, verifies the index, and deletes the data
+ * from the list at the given index.
+ */
 app.delete("/api/:index", async (req, res) => {
     const index = parseInt(req.params.index);
 
@@ -109,6 +125,9 @@ app.delete("/api/:index", async (req, res) => {
 });
 
 // page not found route
+/**
+ * If a page is not found, the following is presented.
+ */
 app.use((req,res) => {
     res.status(404).send("<h1>Page Not Found...</h1>");
 });
