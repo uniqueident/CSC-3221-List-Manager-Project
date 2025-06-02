@@ -13,6 +13,8 @@ body {
 
 path, rect {
     fill: black;
+
+    pointer-events: none;
 }
 
 input {
