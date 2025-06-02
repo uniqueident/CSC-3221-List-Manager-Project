@@ -11,9 +11,12 @@ async function ReadData(filepath ='./listdata.json') {
         //keeps the function async
         const data = await fs.readFile(filepath,'utf8');
         //needed for conversion. (SUCCESS)
-        const parsed = JSON.parse(data);
+        const parsed = JSON.parse(data, null, 2);
 
-        console.log(`Data Retrieved: ${parsed}`);
+        if (!Array.isArray(parsed) || !parsed.every(item => typeof item === "string"))
+            throw new Error("Invalid data format: expected array of strings");
+
+        console.log(`Data Sent: ${parsed}`);
 
         return parsed;
     }
@@ -21,7 +24,7 @@ async function ReadData(filepath ='./listdata.json') {
         //needed in case of failure.
         console.log(`FAILURE TO READ, REASON: ${error}`);
 
-        return error;
+        return [];
     }
 }
 

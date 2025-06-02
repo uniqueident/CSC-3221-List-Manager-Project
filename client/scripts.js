@@ -1,4 +1,4 @@
-const http = new jemHTTP;
+const http = new jemHTTP("");
 
 // Block Variables
 let theList = [];
@@ -9,6 +9,7 @@ const input =  document.querySelector("#new");
 const addButton = document.querySelector("#add");
 
 // Listeners
+
 /**
  * When the add button is clicked, take the input and add it to the list variable.
  * Then refresh the UI by using ShowList().
@@ -21,30 +22,62 @@ addButton.addEventListener("click", (e)=>{
     if(!value)
         return;
 
-    WriteList(value);
-    ShowList();
+    input.value = "";
 
-    console.log(theList);
+    WriteList(value);
 });
 
 /**
  * When the delete button is clicked, get the owner div and use the id to get the index in the list variable.
  * For every item div past the deleted item, the id needs to be decremented by 1 to match the new indices.
  */
-result.addEventListener("click", (e)=>{
+result.addEventListener("click", async (e)=>{
     e.preventDefault();
 
-    if (e.target.id !== "delete")
-        return;
+    if (e.target.id === "delete") {
+        let id = parseInt(e.target.parentNode.id);
 
-    let id = e.target.parentNode.id;
+        try {
+            const resp = await http.delete({ path: `/api/${id}` });
 
-    theList.splice(id, 1);
-    ShowList();
-    console.log(id);
+            if (resp.error)
+                throw new Error(resp.error);
+
+            theList.splice(id, 1);
+            ShowList();
+        }
+        catch (err) {
+            console.error("Failed to delete item: ", err);
+        }
+    }
+    else if (e.target.id === "item") {
+        e.target.addEventListener("blur", async (event) => {
+            const id = parseInt(event.target.parentNode.id);
+            const newValue = event.target.value.trim();
+
+            if (!newValue || newValue === theList[id])
+                return;
+
+            try {
+                const resp = await http.put({ path: `/api/${id}` }, { item: newValue });
+
+                if (resp.error)
+                    throw new Error(resp.error);
+
+                theList[id] = newValue;
+            }
+            catch (err) {
+                console.error("Failed to update item: ", err);
+            }
+        }, { once: true });
+    }
 });
 
 /* Helper Functions */
+
+/**
+ * Outputs theList to the UI in a user friendly manner.
+ */
 function ShowList() {
     let output = "";
 
@@ -105,9 +138,13 @@ async function GetList() {
  */
 async function WriteList(value) {
     theList.push(value);
+    ShowList();
 
     try {
-        await http.post("/api", { item: theList });
+        const resp = await http.post({ path: "/api" }, { item: value } );
+
+        if (resp.error)
+            throw new Error(resp.error);
     }
     catch (err) {
         console.error("Failed to send item to server: ", err);
