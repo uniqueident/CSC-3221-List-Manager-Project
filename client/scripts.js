@@ -39,6 +39,8 @@ result.addEventListener("click", (e)=>{
 
     let id = e.target.parentNode.id;
 
+    theList.splice(id, 1);
+    ShowList();
     console.log(id);
 });
 
